@@ -46,6 +46,21 @@ component extends="testbox.system.BaseSpec"{
 
       });
 
+      describe( "The actor tasks", function(){
+
+        it("can be listed", function(){
+          var apify_request = apify.listActorTasks( limit = 10 );
+          expect( apify_request.statusCode ).toBe( 200 );
+          var raw = apify_request.raw;
+          expect( raw.path ).toBe( baseUrl & '/actor-tasks' );
+          expect( raw.params ).toBe( 'desc=false&limit=10&offset=0' );
+          var data = apify_request.data;
+          expect( data.data ).toHaveKey( 'items' );
+          expect( data.data.items.len() ).toBeLT( 11 );
+        });
+
+      });
+
 		});
 
 
