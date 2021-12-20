@@ -33,7 +33,7 @@ component extends="testbox.system.BaseSpec"{
           expect( apify_request.statusCode ).toBe( 200 );
           var raw = apify_request.raw;
           expect( raw.path ).toBe( baseUrl & '/acts' );
-          expect( raw.params ).toBe( 'desc=false&limit=10&my=true&offset=0' );
+          expect( raw.params ).toBe( 'limit=10&my=true' );
           var data = apify_request.data;
           expect( data.data ).toHaveKey( 'items' );
         });
