@@ -102,6 +102,14 @@ component extends="testbox.system.BaseSpec"{
           expect( raw.method ).toBe( 'PUT' );
         });
 
+        it("can be deleted", function(){
+          var actorTaskId = 'example_actor_task_id';
+          var apify_request = apify.deleteActorTask( actorTaskId );
+          var raw = apify_request.raw;
+          expect( raw.path ).toBe( baseUrl & '/actor-tasks/#actorTaskId#' );
+          expect( raw.method ).toBe( 'DELETE' );
+        });
+
       });
 
 		});
