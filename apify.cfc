@@ -66,8 +66,25 @@ component displayname="apifycfc"  {
       return apiCall( 'GET', '/actor-tasks', params );
     }
 
-    // PRIVATE FUNCTIONS
+    /**
+    * @docs https://docs.apify.com/api/v2#/reference/actor-tasks/task-collection/create-task
+    * @hint Create a task
+    */
+    public struct function createActorTask( required string actId, required string name, struct options, struct input ) {
+      var payload = {
+        "actId": actId,
+        "name": name
+      };
+      if( !isNull( options ) ){
+        payload["options"] = options;
+      }
+      if( !isNull( input ) ){
+        payload["input"] = input;
+      }
+      return apiCall( 'POST', '/actor-tasks', {}, payload );
+    }
 
+    // PRIVATE FUNCTIONS
     private struct function parseSortArgs( required struct args ){
       var params = {};
       if( args.keyExists( 'my' ) && args.my ){
