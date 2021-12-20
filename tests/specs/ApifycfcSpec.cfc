@@ -82,6 +82,31 @@ component extends="testbox.system.BaseSpec"{
           expect( raw.method ).toBe( 'GET' );
         });
 
+        it("can be updated", function(){
+          var actorTaskId = 'example_actor_task_id';
+          var actorId = 'xxx';
+          var name = "books-toscrape2-com";
+          var options = {
+            "build": "latest",
+            "timeoutSecs": 300,
+            "memoryMbytes": 256
+          };
+          var input = {
+            "startUrls": [
+              {
+                  "url": "https://books.toscrape2.com/"
+              }
+            ]
+          };
+          var apify_request = apify.updateActorTask( actorTaskId, actorId, name, options, input );
+          expect( apify_request.statusCode ).toBe( 200 );
+          var raw = apify_request.raw;
+          debug(raw);
+          expect( raw.path ).toBe( baseUrl & '/actor-tasks/#actorTaskId#' );
+          expect( raw.payload ).toBe( '{"options":{"memoryMbytes":256,"build":"latest","timeoutSecs":300},"input":{"startUrls":[{"url":"https://books.toscrape2.com/"}]},"name":"books-toscrape2-com","actId":"xxx"}' );
+          expect( raw.method ).toBe( 'PUT' );
+        });
+
       });
 
 		});
