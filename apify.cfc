@@ -84,6 +84,14 @@ component displayname="apifycfc"  {
       return apiCall( 'POST', '/actor-tasks', {}, payload );
     }
 
+    /**
+    * @docs https://docs.apify.com/api/v2#/reference/actor-tasks/task-object/get-task
+    * @hint Get an object that contains all the details about a task.
+    */
+    public struct function getActorTaskById( required string actorTaskId ) {
+      return apiCall( 'GET', '/actor-tasks/#actorTaskId#' );
+    }
+
     // PRIVATE FUNCTIONS
     private struct function parseSortArgs( required struct args ){
       var params = {};
