@@ -53,19 +53,7 @@ component displayname="apifycfc"  {
     * @hint Get a list of actors
     */
     public struct function listActors( boolean my = false, numeric offset = 0, numeric limit = 0, boolean desc = false ) {
-      var params = {};
-      if( my ){
-        params['my'] = my;
-      }
-      if( offset ){
-        params['offset'] = offset;
-      }
-      if( limit ){
-        params['limit'] = limit;
-      }
-      if( desc ){
-        params['desc'] = desc;
-      }
+      var params = parseSortArgs( arguments );
       return apiCall( 'GET', '/acts', params );
     }
 
@@ -74,13 +62,7 @@ component displayname="apifycfc"  {
     * @hint Get a list of tasks
     */
     public struct function listActorTasks( numeric offset = 0, numeric limit = 0, boolean desc = false ) {
-      var params = {
-        'offset': offset,
-        'desc': desc
-      };
-      if( limit ){
-        params['limit'] = limit;
-      }
+      var params = parseSortArgs( arguments );
       return apiCall( 'GET', '/actor-tasks', params );
     }
 
