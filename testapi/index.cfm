@@ -8,7 +8,24 @@
   if( route == '/acts' ){
 
     if( method == 'GET' ){
-      res = { "data": { "total": 1, "count": 1, "offset": 0, "limit": 1000, "desc": false, "items": [ { "id": "xxx", "createdAt": "2021-12-06T16:18:32.192Z", "modifiedAt": "2021-12-16T19:23:27.247Z", "name": "apify-xxx-test", "username": "xxx" } ] } };
+      res = {
+        "data": {
+          "count": 1,
+          "desc": false,
+          "items": [
+            {
+              "createdAt": "2021-12-06T16:18:32.192Z",
+              "id": "xxx",
+              "modifiedAt": "2021-12-16T19:23:27.247Z",
+              "name": "apify-xxx-test",
+              "username": "xxx"
+            }
+          ],
+          "limit": 1000,
+          "offset": 0,
+          "total": 1
+        }
+      };
 
     }
 
@@ -17,7 +34,74 @@
   if( route == '/actor-tasks' ){
 
     if( method == 'GET' ){
-      res = { "data": { "total": 2, "count": 2, "offset": 0, "limit": 1000, "desc": false, "items": [ { "id": "xxx", "userId": "xxx", "actId": "xxx", "actName": "apify-xxx-test", "name": "www-example-com", "username": "xxx", "actUsername": "xxx", "createdAt": "2021-12-16T18:52:30.737Z", "modifiedAt": "2021-12-16T19:09:09.039Z", "stats": { "totalRuns": 2 } }, { "id": "xxx", "userId": "xxx", "actId": "xxx", "actName": "apify-xxx-test", "name": "also-com", "username": "xxx", "actUsername": "xxx", "createdAt": "2021-12-16T19:31:11.845Z", "modifiedAt": "2021-12-16T19:31:54.976Z", "stats": { "totalRuns": 1 } } ] } };
+      res = {
+        "data": {
+          "count": 2,
+          "desc": false,
+          "items": [
+            {
+              "actId": "xxx",
+              "actName": "apify-xxx-test",
+              "actUsername": "xxx",
+              "createdAt": "2021-12-16T18:52:30.737Z",
+              "id": "xxx",
+              "modifiedAt": "2021-12-16T19:09:09.039Z",
+              "name": "www-example-com",
+              "stats": {
+                "totalRuns": 2
+              },
+              "userId": "xxx",
+              "username": "xxx"
+            },
+            {
+              "actId": "xxx",
+              "actName": "apify-xxx-test",
+              "actUsername": "xxx",
+              "createdAt": "2021-12-16T19:31:11.845Z",
+              "id": "xxx",
+              "modifiedAt": "2021-12-16T19:31:54.976Z",
+              "name": "also-com",
+              "stats": {
+                "totalRuns": 1
+              },
+              "userId": "xxx",
+              "username": "xxx"
+            }
+          ],
+          "limit": 1000,
+          "offset": 0,
+          "total": 2
+        }
+      };
+    }
+
+    if( method == 'POST' ){
+      res = {
+        "data": {
+          "actId": "xxx",
+          "createdAt": "2021-12-20T20:56:38.613Z",
+          "id": "xxx",
+          "input": {
+            "startUrls": [
+              {
+                "url": "https://books.toscrape.com/"
+              }
+            ]
+          },
+          "modifiedAt": "2021-12-20T20:56:38.613Z",
+          "name": "books-toscrape-com",
+          "options": {
+            "build": "latest",
+            "memoryMbytes": 128,
+            "timeoutSecs": 300
+          },
+          "stats": {
+            "totalRuns": 0
+          },
+          "userId": "xxx",
+          "username": "xxx"
+        }
+      };
     }
 
   }
