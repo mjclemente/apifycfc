@@ -113,6 +113,14 @@ component displayname="apifycfc"  {
       return apiCall( 'GET', '/actor-tasks/#actorTaskId#' );
     }
 
+    /**
+    * @docs https://docs.apify.com/api#/reference/actor-tasks/task-object/delete-task
+    * @hint Delete a task by its id
+    */
+    public struct function deleteActorTask( required string actorTaskId ) {
+      return apiCall( 'DELETE', '/actor-tasks/#actorTaskId#' );
+    }
+
     // PRIVATE FUNCTIONS
     private struct function parseSortArgs( required struct args ){
       var params = {};
