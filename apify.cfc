@@ -85,6 +85,27 @@ component displayname="apifycfc"  {
     }
 
     /**
+    * @docs https://docs.apify.com/api#/reference/actor-tasks/task-object/update-task
+    * @hint Update a task
+    */
+    public struct function updateActorTask( required string actorTaskId, string actId, string name, struct options, struct input ) {
+      var payload = {};
+      if( !isNull( actId ) ){
+        payload["actId"] = actId;
+      }
+      if( !isNull( name ) ){
+        payload["name"] = name;
+      }
+      if( !isNull( options ) ){
+        payload["options"] = options;
+      }
+      if( !isNull( input ) ){
+        payload["input"] = input;
+      }
+      return apiCall( 'PUT', '/actor-tasks/#actorTaskId#', {}, payload );
+    }
+
+    /**
     * @docs https://docs.apify.com/api/v2#/reference/actor-tasks/task-object/get-task
     * @hint Get an object that contains all the details about a task.
     */
