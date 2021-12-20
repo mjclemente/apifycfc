@@ -52,8 +52,16 @@ component displayname="apifycfc"  {
     * @docs https://docs.apify.com/api/v2#/reference/actors/actor-collection/get-list-of-actors
     * @hint Get a list of actors
     */
-    public struct function listActors() {
-      return apiCall( 'GET', '/acts' );
+    public struct function listActors( boolean my = false, numeric offset = 0, numeric limit = 0, boolean desc = false ) {
+      var params = {
+        'my': my,
+        'offset': offset,
+        'desc': desc
+      };
+      if( limit ){
+        params['limit'] = limit;
+      }
+      return apiCall( 'GET', '/acts', params );
     }
 
     // PRIVATE FUNCTIONS
