@@ -64,6 +64,21 @@ component displayname="apifycfc"  {
       return apiCall( 'GET', '/acts', params );
     }
 
+    /**
+    * @docs https://docs.apify.com/api#/reference/actor-tasks/task-collection/get-list-of-tasks
+    * @hint Get a list of tasks
+    */
+    public struct function listActorTasks( numeric offset = 0, numeric limit = 0, boolean desc = false ) {
+      var params = {
+        'offset': offset,
+        'desc': desc
+      };
+      if( limit ){
+        params['limit'] = limit;
+      }
+      return apiCall( 'GET', '/actor-tasks', params );
+    }
+
     // PRIVATE FUNCTIONS
     private struct function apiCall(
         required string httpMethod,
