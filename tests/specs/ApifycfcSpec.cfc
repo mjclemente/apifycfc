@@ -29,18 +29,18 @@ component extends="testbox.system.BaseSpec"{
       describe( "The actors", function(){
 
         it("can be listed", function(){
-          var actor_request = apify.listActors();
-          expect( actor_request.statusCode ).toBe( 200 );
-          var raw = actor_request.raw;
+          var apify_request = apify.listActors();
+          expect( apify_request.statusCode ).toBe( 200 );
+          var raw = apify_request.raw;
           expect( raw.path ).toBe( baseUrl & '/acts' );
-          var data = actor_request.data;
+          var data = apify_request.data;
           expect( data.data ).toHaveKey( 'items' );
         });
 
         it("can be listed with modifiers", function(){
-          var actor_request = apify.listActors( my = true, limit = 10 );
-          expect( actor_request.statusCode ).toBe( 200 );
-          var raw = actor_request.raw;
+          var apify_request = apify.listActors( my = true, limit = 10 );
+          expect( apify_request.statusCode ).toBe( 200 );
+          var raw = apify_request.raw;
           expect( raw.params ).toBe( 'desc=false&limit=10&my=true&offset=0' );
         });
 
