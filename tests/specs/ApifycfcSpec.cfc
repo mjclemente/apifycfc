@@ -34,6 +34,7 @@ component extends="testbox.system.BaseSpec"{
           var raw = apify_request.raw;
           expect( raw.path ).toBe( baseUrl & '/acts' );
           expect( raw.params ).toBe( 'limit=10&my=true' );
+          expect( raw.method ).toBe( 'GET' );
           var data = apify_request.data;
           expect( data.data ).toHaveKey( 'items' );
         });
@@ -48,6 +49,7 @@ component extends="testbox.system.BaseSpec"{
           var raw = apify_request.raw;
           expect( raw.path ).toBe( baseUrl & '/actor-tasks' );
           expect( raw.params ).toBe( 'limit=10' );
+          expect( raw.method ).toBe( 'GET' );
           var data = apify_request.data;
           expect( data.data ).toHaveKey( 'items' );
           expect( data.data.items.len() ).toBeLT( 11 );
@@ -73,6 +75,7 @@ component extends="testbox.system.BaseSpec"{
           var raw = apify_request.raw;
           expect( raw.path ).toBe( baseUrl & '/actor-tasks' );
           expect( raw.payload ).toBe( '{"options":{"memoryMbytes":128,"build":"latest","timeoutSecs":300},"input":{"startUrls":[{"url":"https://books.toscrape.com/"}]},"name":"books-toscrape-com","actId":"xxx"}' );
+          expect( raw.method ).toBe( 'POST' );
           var data = apify_request.data;
           expect( data.data ).toHaveKey( 'id' );
         });
