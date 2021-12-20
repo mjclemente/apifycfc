@@ -5,7 +5,9 @@
     "contributors":[],
     "dependencies":{},
     "description":"",
-    "devDependencies":{},
+    "devDependencies":{
+        "testbox":"^4.5.0+5"
+    },
     "documentation":"",
     "homepage":"",
     "ignore":[
@@ -13,7 +15,9 @@
         "/test/",
         "/tests/"
     ],
-    "installPaths":{},
+    "installPaths":{
+        "testbox":"testbox/"
+    },
     "instructions":"",
     "keywords":[],
     "license":[
