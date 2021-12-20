@@ -85,6 +85,24 @@ component displayname="apifycfc"  {
     }
 
     // PRIVATE FUNCTIONS
+
+    private struct function parseSortArgs( required struct args ){
+      var params = {};
+      if( args.keyExists( 'my' ) && args.my ){
+        params['my'] = args.my;
+      }
+      if( args.keyExists( 'offset' ) && args.offset ){
+        params['offset'] = args.offset;
+      }
+      if( args.keyExists( 'limit' ) && args.limit ){
+        params['limit'] = args.limit;
+      }
+      if( args.keyExists( 'desc' ) && args.desc ){
+        params['desc'] = args.desc;
+      }
+      return params;
+    }
+
     private struct function apiCall(
         required string httpMethod,
         required string path,
