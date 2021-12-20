@@ -77,6 +77,15 @@ component extends="testbox.system.BaseSpec"{
           expect( data.data ).toHaveKey( 'id' );
         });
 
+        it("can be retrieved by id", function(){
+          var actorTaskId = 'example_actor_task_id';
+          var apify_request = apify.getActorTaskById( actorTaskId );
+          expect( apify_request.statusCode ).toBe( 200 );
+          var raw = apify_request.raw;
+          expect( raw.path ).toBe( baseUrl & '/actor-tasks/#actorTaskId#' );
+          expect( raw.method ).toBe( 'GET' );
+        });
+
       });
 
 		});
