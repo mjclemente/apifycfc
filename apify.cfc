@@ -53,13 +53,18 @@ component displayname="apifycfc"  {
     * @hint Get a list of actors
     */
     public struct function listActors( boolean my = false, numeric offset = 0, numeric limit = 0, boolean desc = false ) {
-      var params = {
-        'my': my,
-        'offset': offset,
-        'desc': desc
-      };
+      var params = {};
+      if( my ){
+        params['my'] = my;
+      }
+      if( offset ){
+        params['offset'] = offset;
+      }
       if( limit ){
         params['limit'] = limit;
+      }
+      if( desc ){
+        params['desc'] = desc;
       }
       return apiCall( 'GET', '/acts', params );
     }
