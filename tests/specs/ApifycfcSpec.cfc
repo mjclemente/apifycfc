@@ -53,6 +53,30 @@ component extends="testbox.system.BaseSpec"{
           expect( data.data.items.len() ).toBeLT( 11 );
         });
 
+        it("can be created", function(){
+          var actorId = 'xxx';
+          var name = "books-toscrape-com";
+          var options = {
+            "build": "latest",
+            "timeoutSecs": 300,
+            "memoryMbytes": 128
+          };
+          var input = {
+            "startUrls": [
+              {
+                  "url": "https://books.toscrape.com/"
+              }
+            ]
+          };
+          var apify_request = apify.createActorTask( actorId, name, options, input );
+          expect( apify_request.statusCode ).toBe( 200 );
+          var raw = apify_request.raw;
+          expect( raw.path ).toBe( baseUrl & '/actor-tasks' );
+          expect( raw.payload ).toBe( '{"options":{"memoryMbytes":128,"build":"latest","timeoutSecs":300},"input":{"startUrls":[{"url":"https://books.toscrape.com/"}]},"name":"books-toscrape-com","actId":"xxx"}' );
+          var data = apify_request.data;
+          expect( data.data ).toHaveKey( 'id' );
+        });
+
       });
 
 		});
