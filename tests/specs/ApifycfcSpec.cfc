@@ -47,7 +47,7 @@ component extends="testbox.system.BaseSpec"{
           expect( apify_request.statusCode ).toBe( 200 );
           var raw = apify_request.raw;
           expect( raw.path ).toBe( baseUrl & '/actor-tasks' );
-          expect( raw.params ).toBe( 'desc=false&limit=10&offset=0' );
+          expect( raw.params ).toBe( 'limit=10' );
           var data = apify_request.data;
           expect( data.data ).toHaveKey( 'items' );
           expect( data.data.items.len() ).toBeLT( 11 );
