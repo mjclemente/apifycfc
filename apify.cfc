@@ -451,4 +451,60 @@ component displayname="apifycfc"  {
         return s;
     }
 
+    /**
+   * Ported from official apify package: https://github.com/apify/apify-client-js/blob/master/src/http_client.ts
+   * Handles all unexpected errors that can happen, but are not
+   * Apify API typed errors. E.g. network errors, timeouts and so on.
+   */
+    private boolean function _isStatusOk( required numeric status_code ) {
+      return status_code < 300;
+    }
+
+    private boolean function _isTimeoutError( required numeric status_code ) {
+      return status_code == 408;
+    }
+
+    private boolean function _isRateLimitError( required numeric status_code ){
+      return status_code == variables.RATE_LIMIT_EXCEEDED_STATUS_CODE;
+    }
+
+    /**
+    * @hint Throws errors when appropriate, but skips the errors that can be retried
+    */
+    private void function _handleRequestError( required struct response ) {
+      if( _isTimeoutError(response.statusCode) && variables.doNotRetryTimeouts ) {
+        throw( type="ApifyApiError", message="Request timeout: #response.statusCode# #response.statusText#.", detail="The setting doNotRetryTimeouts is set to true, and the request timed out.", errorcode=response.statusCode );
+      }
+
+      if( !_isRetryableError( response ) ) {
+        throw( type="ApifyApiError", message="Request error: #response.statusCode# #response.statusText#.", detail="This error cannot be retried.", errorcode=response.statusCode );
+      }
+    }
+
+    private boolean function _isRetryableError( required struct response ) {
+      return _isStatusCodeRetryable( response.statusCode ) || _isNetworkError(response);
+    }
+
+    private boolean function _isStatusCodeRetryable( required numeric status_code ) {
+      var isRateLimitError = _isRateLimitError(status_code);
+      var isInternalError = status_code >= 500;
+      return isRateLimitError || isInternalError;
+    }
+
+    private boolean function _isNetworkError( required struct response ) {
+      return left(response.statuscode, 18) == 'Connection Failure';
+    }
+
+    /**
+    * @hint I'm not including this for now - I'll need to see how often it actually happens in the wild in order to determine if/when/where it should be included.
+    */
+    private boolean function _isResponseBodyInvalid( required struct response ) {
+      var mimeType = response.mimetype ?: '';
+      return mimeType == 'application/json' && !isJson( response.fileContent );
+    }
+
+    private void function _addRateLimitError( required numeric attempt ) {
+      variables.stats.rateLimitErrors[attempt]++;
+    }
+
 }
