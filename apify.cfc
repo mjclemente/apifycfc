@@ -50,7 +50,7 @@ component displayname="apifycfc"  {
 
     /**
     * @docs https://docs.apify.com/api/v2#/reference/actors/actor-collection/get-list-of-actors
-    * @hint Get a list of actors
+    * @hint Retrieves a list of actors
     */
     public struct function listActors( boolean my = false, numeric offset = 0, numeric limit = 0, boolean desc = false ) {
       var params = parseSortArgs( arguments );
@@ -59,7 +59,7 @@ component displayname="apifycfc"  {
 
     /**
     * @docs https://docs.apify.com/api#/reference/actor-tasks/task-collection/get-list-of-tasks
-    * @hint Get a list of tasks
+    * @hint Retrieves a list of tasks
     */
     public struct function listActorTasks( numeric offset = 0, numeric limit = 0, boolean desc = false ) {
       var params = parseSortArgs( arguments );
@@ -68,7 +68,7 @@ component displayname="apifycfc"  {
 
     /**
     * @docs https://docs.apify.com/api/v2#/reference/actor-tasks/task-collection/create-task
-    * @hint Create a task
+    * @hint Creates a new actor task
     */
     public struct function createActorTask( required string actId, required string name, struct options, struct input ) {
       var payload = {
@@ -86,7 +86,7 @@ component displayname="apifycfc"  {
 
     /**
     * @docs https://docs.apify.com/api#/reference/actor-tasks/task-object/update-task
-    * @hint Update a task
+    * @hint Updates an actor task
     */
     public struct function updateActorTask( required string actorTaskId, string actId, string name, struct options, struct input ) {
       var payload = {};
@@ -107,7 +107,7 @@ component displayname="apifycfc"  {
 
     /**
     * @docs https://docs.apify.com/api/v2#/reference/actor-tasks/task-object/get-task
-    * @hint Get an object that contains all the details about a task.
+    * @hint Retrieves an object that contains all the details about an actor task.
     */
     public struct function getActorTaskById( required string actorTaskId ) {
       return apiCall( 'GET', '/actor-tasks/#actorTaskId#' );
@@ -115,7 +115,7 @@ component displayname="apifycfc"  {
 
     /**
     * @docs https://docs.apify.com/api#/reference/actor-tasks/task-object/delete-task
-    * @hint Delete a task by its id
+    * @hint Deletes an actor task by its id
     */
     public struct function deleteActorTask( required string actorTaskId ) {
       return apiCall( 'DELETE', '/actor-tasks/#actorTaskId#' );
