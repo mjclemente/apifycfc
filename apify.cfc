@@ -20,6 +20,11 @@ component displayname="apifycfc"  {
 
         structAppend( variables, arguments );
 
+        if( debug ){
+		      variables.stdout = createObject( "java", "java.lang.System" ).out;
+          _debug( "Apifycfc init" );
+        }
+
         //map sensitive args to env variables or java system props
         var secrets = {
             'apify_token': 'APIFY_TOKEN'
@@ -506,6 +511,12 @@ component displayname="apifycfc"  {
 
     private void function _addRateLimitError( required numeric attempt ) {
       variables.stats.rateLimitErrors[attempt]++;
+    }
+
+    private void function _debug( required string message ){
+      if( variables.debug ){
+        variables.stdout.println( message );
+      }
     }
 
 }
