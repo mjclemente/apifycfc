@@ -154,13 +154,15 @@ component displayname="apifycfc"  {
         any payload = '',
         struct headers = { }
     ) {
-
+        variables.stats.calls++;
         var fullApiPath = variables.baseUrl & path;
         var requestHeaders = getBaseHttpHeaders();
         requestHeaders.append( headers, true );
 
         var requestStart = getTickCount();
+
         var apiResponse = makeHttpRequest( httpMethod = httpMethod, path = fullApiPath, queryParams = queryParams, headers = requestHeaders, payload = payload );
+
 
         var result = {
             'responseTime' = getTickCount() - requestStart,
