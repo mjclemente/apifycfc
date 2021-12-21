@@ -300,7 +300,22 @@ component displayname="apifycfc"  {
             }
 
         }
-        return result;
+        return _normalizeHttpResponse(result);
+    }
+
+    private struct function _normalizeHttpResponse( required struct result ){
+      var statusCode = val( result.statuscode );
+      var normalizedResponse = {
+        'statusCode' = statusCode,
+        'statusText' = statusCode ? listRest( result.statuscode, " " ) : result.statuscode,
+        'charset' = result.charset ?: "UTF-8",
+        'filecontent' = result.filecontent,
+        'headers' = result.responseheader
+      }
+      if( result.keyExists( 'mimetype' ) ){
+        normalizedResponse['mimetype'] = result.mimetype;
+      }
+      return normalizedResponse;
     }
 
     /**
