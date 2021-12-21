@@ -11,7 +11,9 @@ component displayname="apifycfc"  {
         string apify_token = '',
         string baseUrl = "https://api.apify.com/v2",
         boolean includeRaw = false,
-        numeric httpTimeout = 50
+        numeric httpTimeout = 50,
+        numeric maxRetries = 8,
+        numeric minDelayBetweenRetriesMillis = 500
     ) {
 
         structAppend( variables, arguments );
