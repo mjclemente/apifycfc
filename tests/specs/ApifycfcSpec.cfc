@@ -5,7 +5,7 @@ component extends="testbox.system.BaseSpec"{
 	function beforeAll(){
     inspectTemplates();
     baseUrl = 'http://127.0.0.1:52558/testapi';
-    apify = new apify( baseUrl = baseUrl, includeRaw = true );
+    apify = new apify( baseUrl = baseUrl, includeRaw = true, debug = true );
 	}
 
 	function afterAll(){
