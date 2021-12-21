@@ -47,6 +47,12 @@ component displayname="apifycfc"  {
         //declare file fields to be handled via multipart/form-data **Important** this is not applicable if payload is application/json
         variables.fileFields = [];
 
+        variables.stats = {
+          "calls": 0,
+          "requests": 0,
+          "rateLimitErrors": 0
+        }
+
         return this;
     }
 
