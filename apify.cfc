@@ -167,14 +167,11 @@ component displayname="apifycfc"  {
 
         var requestStart = getTickCount();
 
-        var apiResponse = makeHttpRequest( httpMethod = httpMethod, path = fullApiPath, queryParams = queryParams, headers = requestHeaders, payload = payload );
+        var apiResponse = attemptHttpRequest( httpMethod = httpMethod, path = fullApiPath, queryParams = queryParams, headers = requestHeaders, payload = payload );
 
-
+        // we'll append the rest to this later
         var result = {
-            'responseTime' = getTickCount() - requestStart,
-            'statusCode' = listFirst( apiResponse.statuscode, " " ),
-            'statusText' = listRest( apiResponse.statuscode, " " ),
-            'headers' = apiResponse.responseheader
+            'responseTime' = getTickCount() - requestStart
         };
 
         var parsedFileContent = {};
@@ -195,6 +192,9 @@ component displayname="apifycfc"  {
 
         //stored in data, because some responses are arrays and others are structs
         result[ 'data' ] = parsedFileContent;
+        result[ 'statusCode' ] = apiResponse.statusCode;
+        result[ 'statusText' ] = apiResponse.statusText;
+        result[ 'headers' ] = apiResponse.headers;
 
         if ( variables.includeRaw ) {
             result[ 'raw' ] = {
@@ -207,6 +207,44 @@ component displayname="apifycfc"  {
         }
 
         return result;
+    }
+
+    private any function attemptHttpRequest(
+      required string httpMethod,
+      required string path,
+      struct queryParams = { },
+      struct headers = { },
+      any payload = ''
+    ) {
+      var attempts = 0;
+      var response = {};
+      while (attempts < variables.maxRetries) {
+        attempts++;
+
+        // no try/catch here, for now... I don't think it's needed, since we should be able to handle everything with the response from the cfhttp request (which will include error information, if needed)
+        response = makeHttpRequest( httpMethod = httpMethod, path = path, queryParams = queryParams, headers = headers, payload = payload );
+
+        if( _isStatusOk(response.statusCode) ){
+          break;
+        }
+
+        if( _isRateLimitError(response.statusCode) ) {
+          _addRateLimitError(attempt);
+        }
+
+        _handleRequestError( response );
+
+        // exponential back off! But not after the last failure
+        if( attempts != variables.maxRetries ){
+          sleep( attempts^2*1000 );
+        }
+      }
+      // if we end up here with an empty response, we've failed
+      if( response.isEmpty() ){
+        throw( type="ApifyApiError", message="Retry limit reached: #variables.maxRetries# attempts failed." );
+      }
+
+      return response;
     }
 
     private struct function getBaseHttpHeaders() {
