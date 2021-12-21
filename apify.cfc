@@ -219,6 +219,7 @@ component displayname="apifycfc"  {
         struct headers = { },
         any payload = ''
     ) {
+        variables.stats.requests++;
         var result = '';
 
         var fullPath = path & ( !queryParams.isEmpty()
