@@ -51,8 +51,13 @@ component displayname="apifycfc"  {
         variables.stats = {
           "calls": 0,
           "requests": 0,
-          "rateLimitErrors": 0
+          "rateLimitErrors": []
         }
+        // initial value in each slot is 0
+        while( variables.stats.rateLimitErrors.len() < maxRetries ){
+          variables.stats.rateLimitErrors.append(0);
+      }
+        variables.RATE_LIMIT_EXCEEDED_STATUS_CODE = 429;
 
         return this;
     }
