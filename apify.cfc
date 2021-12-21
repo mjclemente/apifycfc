@@ -22,7 +22,7 @@ component displayname="apifycfc"  {
 
         if( debug ){
 		      variables.stdout = createObject( "java", "java.lang.System" ).out;
-          _debug( "Apifycfc init" );
+          _debug( "Apifycfc init", arguments );
         }
 
         //map sensitive args to env variables or java system props
@@ -513,9 +513,13 @@ component displayname="apifycfc"  {
       variables.stats.rateLimitErrors[attempt]++;
     }
 
-    private void function _debug( required string message ){
+    private void function _debug( required string message, any extraInfo = {} ){
       if( variables.debug ){
-        variables.stdout.println( message );
+        var enriched_message = "#dateTimeFormat( now(), "yyyy-mm-dd HH:NN:SS" )# DEBUG #message#";
+        if( !isEmpty( extraInfo ) ){
+          enriched_message &= " ExtraInfo: #serializeJSON( extraInfo )#";
+        }
+        variables.stdout.println( enriched_message );
       }
     }
 
