@@ -13,7 +13,8 @@ component displayname="apifycfc"  {
         boolean includeRaw = false,
         numeric httpTimeout = 360,
         numeric maxRetries = 8,
-        numeric minDelayBetweenRetriesMillis = 500
+        numeric minDelayBetweenRetriesMillis = 500,
+        boolean doNotRetryTimeouts = false
     ) {
 
         structAppend( variables, arguments );
