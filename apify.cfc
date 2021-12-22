@@ -161,6 +161,15 @@ component displayname="apifycfc"  {
       return apiCall( 'PUT', '/actor-tasks/#actorTaskId#/input', {}, input );
     }
 
+    /**
+    * @docs https://docs.apify.com/api#/reference/actor-tasks/run-collection/get-list-of-task-runs
+    * @hint Lists the runs for a specific task
+    */
+    public struct function listActorTaskRuns( required string actorTaskId, numeric offset = 0, numeric limit = 0, boolean desc = false, string status ) {
+      var params = parseSortArgs( arguments );
+      return apiCall( 'GET', '/actor-tasks/#actorTaskId#/runs', params );
+    }
+
     // TODO Runnings tasks
 
     // PRIVATE FUNCTIONS
