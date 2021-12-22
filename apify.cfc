@@ -22,9 +22,7 @@ component displayname="apifycfc"  {
 
         if( debug ){
 		      variables.stdout = createObject( "java", "java.lang.System" ).out;
-          var options = arguments.copy();
-          options.delete("apify_token");
-          _debug( "Apifycfc init", options );
+          _debug( "Apifycfc init", arguments );
         }
 
         //map sensitive args to env variables or java system props
@@ -523,6 +521,10 @@ component displayname="apifycfc"  {
       if( variables.debug ){
         var enriched_message = "#dateTimeFormat( now(), "yyyy-mm-dd HH:NN:SS" )# DEBUG #message#";
         if( !isEmpty( extraInfo ) ){
+          extraInfo.delete("apify_token");
+          if( extraInfo.keyExists( "headers" ) ){
+            extraInfo.headers.delete("Authorization");
+          }
           enriched_message &= " ExtraInfo: #serializeJSON( extraInfo )#";
         }
         variables.stdout.println( enriched_message );
