@@ -58,7 +58,17 @@ component extends="testbox.system.BaseSpec"{
         });
 
         it("will retry rate limit errors", function(){
-          expect( apify ).toBeInstanceOf( 1 );
+          apify_retry = new apify(
+            baseUrl = "#baseUrl#/429",
+            includeRaw = true,
+            maxRetries = 2,
+            debug = true
+          );
+
+          apify_retry.listActors( my = true, limit = 10 );
+          var stats = apify_retry.retrieveCfcStats();
+          expect( stats.calls ).toBe( 1 );
+          expect( stats.requests ).toBe( 2 );
         });
 
         it("respects maxRetries setting", function(){
