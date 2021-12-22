@@ -170,7 +170,37 @@ component displayname="apifycfc"  {
       return apiCall( 'GET', '/actor-tasks/#actorTaskId#/runs', params );
     }
 
-    // TODO Runnings tasks
+    /**
+    * @docs https://docs.apify.com/api#/reference/actor-tasks/run-collection/run-task
+    * @hint Runs an actor task and immediately returns without waiting for the run to finish. If input is provided for the payload body, it is used to override the default input for the task.
+    */
+    public struct function runActorTask(
+      required string actorTaskId,
+      numeric timeout,
+      numeric memory,
+      string build,
+      numeric waitForFinish,
+      string webhooks,
+      struct input = {}
+    ) {
+      var params = {};
+      if( !isNull( timeout ) ){
+        params["timeout"] = timeout;
+      }
+      if( !isNull( memory ) ){
+        params["memory"] = memory;
+      }
+      if( !isNull( build ) ){
+        params["build"] = build;
+      }
+      if( !isNull( waitForFinish ) ){
+        params["waitForFinish"] = waitForFinish;
+      }
+      if( !isNull( webhooks ) ){
+        params["webhooks"] = webhooks;
+      }
+      return apiCall( 'POST', '/actor-tasks/#actorTaskId#/runs', params, input );
+    }
 
     // PRIVATE FUNCTIONS
     private struct function parseSortArgs( required struct args ){
