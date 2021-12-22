@@ -175,6 +175,14 @@ component extends="testbox.system.BaseSpec"{
           expect( raw.method ).toBe( 'GET' );
         });
 
+        it("can have their input retrieved", function(){
+          var actorTaskId = 'example_actor_task_id';
+          var apify_request = apify.getActorTaskInput( actorTaskId );
+          var raw = apify_request.raw;
+          expect( raw.path ).toBe( baseUrl & '/actor-tasks/#actorTaskId#/input' );
+          expect( raw.method ).toBe( 'GET' );
+        });
+
         it("can be updated", function(){
           var actorTaskId = 'example_actor_task_id';
           var actorId = 'xxx';
