@@ -22,7 +22,9 @@ component displayname="apifycfc"  {
 
         if( debug ){
 		      variables.stdout = createObject( "java", "java.lang.System" ).out;
-          _debug( "Apifycfc init", arguments );
+          var options = arguments.copy();
+          options.delete("apify_token");
+          _debug( "Apifycfc init", options );
         }
 
         //map sensitive args to env variables or java system props
