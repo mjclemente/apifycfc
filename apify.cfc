@@ -473,7 +473,7 @@ component displayname="apifycfc"  {
    * Apify API typed errors. E.g. network errors, timeouts and so on.
    */
     private boolean function _isStatusOk( required numeric status_code ) {
-      return status_code < 300;
+      return status_code >= 200 && status_code < 300;
     }
 
     private boolean function _isTimeoutError( required numeric status_code ) {
