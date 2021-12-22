@@ -26,6 +26,54 @@ component extends="testbox.system.BaseSpec"{
 				expect( apify ).toBeInstanceOf( 'apify' );
 			});
 
+      describe( "The retry logic", function(){
+
+        it("will retry 500 errors", function(){
+          apify_retry = new apify(
+            baseUrl = "#baseUrl#/500",
+            includeRaw = true,
+            maxRetries = 2,
+            debug = true
+          );
+
+          apify_retry.listActors( my = true, limit = 10 );
+          var stats = apify_retry.retrieveCfcStats();
+          expect( stats.calls ).toBe( 1 );
+          expect( stats.requests ).toBe( 2 );
+        });
+
+        it("will retry network errors", function(){
+          apify_retry = new apify(
+            baseUrl = "http://notlocalhost",
+            includeRaw = true,
+            maxRetries = 2,
+            debug = true
+          );
+
+          var test = apify_retry.listActors( my = true, limit = 10 );
+          debug(test);
+          var stats = apify_retry.retrieveCfcStats();
+          expect( stats.calls ).toBe( 1 );
+          expect( stats.requests ).toBe( 2 );
+        });
+
+        it("will retry rate limit errors", function(){
+          expect( apify ).toBeInstanceOf( 1 );
+        });
+
+        it("respects maxRetries setting", function(){
+          expect( apify ).toBeInstanceOf( 1 );
+        });
+
+        it("throws on errors that cannot be retried", function(){
+          expect( apify ).toBeInstanceOf( 1 );
+        });
+
+        it("throws when max retries are reached", function(){
+          expect( apify ).toBeInstanceOf( 1 );
+        });
+      });
+
       describe( "The actors", function(){
 
         it("can be listed", function(){
