@@ -243,7 +243,7 @@ component displayname="apifycfc"  {
 
         if( _isRateLimitError(response.statusCode) ) {
           _debug( "ApifyApi request encountered a rate limit status code." );
-          _addRateLimitError(attempt);
+          _addRateLimitError(attempts);
         }
 
         _handleRequestError( response );
