@@ -508,7 +508,7 @@ component displayname="apifycfc"  {
     }
 
     private boolean function _isNetworkError( required struct response ) {
-      return left(response.statuscode, 18) == 'Connection Failure';
+      return left(response.statusText, 18) == 'Connection Failure';
     }
 
     /**
