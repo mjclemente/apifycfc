@@ -250,7 +250,9 @@ component displayname="apifycfc"  {
 
         // exponential back off! But not after the last failure
         if( attempts != variables.maxRetries ){
-          sleep( attempts^2*1000 );
+          var backoff = attempts^2*1000;
+          _debug( "ApifyApi request #attempt# failed. Will be retried after #backoff#" );
+          sleep( backoff );
         }
       }
       // if we end up here with an empty response, we've failed
