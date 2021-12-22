@@ -36,10 +36,15 @@ component extends="testbox.system.BaseSpec"{
             debug = true
           );
 
-          apify_retry.listActors( my = true, limit = 10 );
+          expect(
+            function(){
+              apify_retry.listActors( my = true, limit = 10 )
+            }
+          ).toThrow( "ApifyApiError" );
           var stats = apify_retry.retrieveCfcStats();
           expect( stats.calls ).toBe( 1 );
           expect( stats.requests ).toBe( 2 );
+
         });
 
         it("will retry network errors", function(){
@@ -50,8 +55,11 @@ component extends="testbox.system.BaseSpec"{
             debug = true
           );
 
-          var test = apify_retry.listActors( my = true, limit = 10 );
-          debug(test);
+          expect(
+            function(){
+              apify_retry.listActors( my = true, limit = 10 )
+            }
+          ).toThrow( "ApifyApiError" );
           var stats = apify_retry.retrieveCfcStats();
           expect( stats.calls ).toBe( 1 );
           expect( stats.requests ).toBe( 2 );
