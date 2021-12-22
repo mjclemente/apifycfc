@@ -153,6 +153,14 @@ component displayname="apifycfc"  {
       return apiCall( 'GET', '/actor-tasks/#actorTaskId#/input' );
     }
 
+    /**
+    * @docs https://docs.apify.com/api#/reference/actor-tasks/task-input-object/update-task-input
+    * @hint Updates the input of an actor task
+    */
+    public struct function updateActorTaskInput( required string actorTaskId, required struct input ) {
+      return apiCall( 'PUT', '/actor-tasks/#actorTaskId#/input', {}, input );
+    }
+
     // TODO Runnings tasks
 
     // PRIVATE FUNCTIONS
