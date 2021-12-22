@@ -70,6 +70,10 @@ component displayname="apifycfc"  {
         return this;
     }
 
+    public struct function retrieveCfcStats() {
+      return variables.stats;
+    }
+
     /**
     * @docs https://docs.apify.com/api/v2#/reference/actors/actor-collection/get-list-of-actors
     * @hint Retrieves a list of actors
