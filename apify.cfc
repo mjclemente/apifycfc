@@ -187,6 +187,9 @@ component displayname="apifycfc"  {
       if( args.keyExists( 'desc' ) && args.desc ){
         params['desc'] = args.desc;
       }
+      if( args.keyExists( 'status' ) && len(args.status) ){
+        params['status'] = args.status;
+      }
       return params;
     }
 
