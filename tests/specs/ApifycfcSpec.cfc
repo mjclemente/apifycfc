@@ -83,10 +83,6 @@ component extends="testbox.system.BaseSpec"{
           expect( stats.requests ).toBe( 2 );
         });
 
-        it("respects maxRetries setting", function(){
-          expect( apify ).toBeInstanceOf( 1 );
-        });
-
         it("throws on errors that cannot be retried", function(){
           expect( apify ).toBeInstanceOf( 1 );
         });
