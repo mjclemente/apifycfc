@@ -144,7 +144,6 @@ component extends="testbox.system.BaseSpec"{
           };
           var apify_request = apify.updateActorTask( actorTaskId, actorId, name, options, input );
           var raw = apify_request.raw;
-          debug(raw);
           expect( raw.path ).toBe( baseUrl & '/actor-tasks/#actorTaskId#' );
           expect( raw.payload ).toBe( '{"options":{"memoryMbytes":256,"build":"latest","timeoutSecs":300},"input":{"startUrls":[{"url":"https://books.toscrape2.com/"}]},"name":"books-toscrape2-com","actId":"xxx"}' );
           expect( raw.method ).toBe( 'PUT' );
