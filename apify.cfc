@@ -257,6 +257,7 @@ component displayname="apifycfc"  {
       }
       // if we end up here with an empty response, we've failed
       if( response.isEmpty() ){
+        _debug( "ApifyApi request #attempts# failed. Will not retry." );
         throw( type="ApifyApiError", message="Retry limit reached: #variables.maxRetries# attempts failed." );
       }
 
