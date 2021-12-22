@@ -227,6 +227,7 @@ component displayname="apifycfc"  {
       struct headers = { },
       any payload = ''
     ) {
+      _debug( "#getFunctionCalledName()#", arguments );
       var attempts = 0;
       var response = {};
       while (attempts < variables.maxRetries) {
@@ -236,10 +237,12 @@ component displayname="apifycfc"  {
         response = makeHttpRequest( httpMethod = httpMethod, path = path, queryParams = queryParams, headers = headers, payload = payload );
 
         if( _isStatusOk(response.statusCode) ){
+          _debug( "ApifyApi request succeeded in #attempts# attempts" );
           break;
         }
 
         if( _isRateLimitError(response.statusCode) ) {
+          _debug( "ApifyApi request encountered a rate limit status code." );
           _addRateLimitError(attempt);
         }
 
