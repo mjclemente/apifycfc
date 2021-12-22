@@ -255,7 +255,9 @@ component displayname="apifycfc"  {
           _addRateLimitError(attempts);
         }
 
-        _handleRequestError( response );
+        if( !_isRetryableError( response ) ){
+          return response;
+        }
 
         // exponential back off! But not after the last failure
         if( attempts != variables.maxRetries ){
@@ -490,21 +492,19 @@ component displayname="apifycfc"  {
       return status_code == variables.RATE_LIMIT_EXCEEDED_STATUS_CODE;
     }
 
-    /**
-    * @hint Throws errors when appropriate, but skips the errors that can be retried
-    */
-    private void function _handleRequestError( required struct response ) {
-      if( _isTimeoutError(response.statusCode) && variables.doNotRetryTimeouts ) {
-        throw( type="ApifyApiError", message="Request timeout: #response.statusCode# #response.statusText#.", detail="The setting doNotRetryTimeouts is set to true, and the request timed out.", errorcode=response.statusCode );
-      }
-
-      if( !_isRetryableError( response ) ) {
-        throw( type="ApifyApiError", message="Request error: #response.statusCode# #response.statusText#.", detail="This error cannot be retried.", errorcode=response.statusCode );
-      }
-    }
-
     private boolean function _isRetryableError( required struct response ) {
-      return _isStatusCodeRetryable( response.statusCode ) || _isNetworkError(response);
+      if( _isTimeoutError(response.statusCode) && variables.doNotRetryTimeouts ) {
+        _debug( "ApifyApi request timeout: #response.statusCode# #response.statusText#. The setting doNotRetryTimeouts is set to true, so it will not be retried." );
+        return false;
+      }
+      if( _isStatusCodeRetryable( response.statusCode ) ){
+        return true;
+      } else if( _isNetworkError( response ) ){
+        return true;
+      } else {
+        _debug( "ApifyApi request error: #response.statusCode# #response.statusText#. This error cannot be retried." );
+        return false;
+      }
     }
 
     private boolean function _isStatusCodeRetryable( required numeric status_code ) {
