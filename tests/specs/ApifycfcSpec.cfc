@@ -83,13 +83,14 @@ component extends="testbox.system.BaseSpec"{
           expect( stats.requests ).toBe( 2 );
         });
 
-        it("throws on errors that cannot be retried", function(){
+        it("throws on timeout errors when set not to retry timeouts", function(){
           expect( apify ).toBeInstanceOf( 1 );
         });
 
-        it("throws when max retries are reached", function(){
+        it("throws on 400 errors", function(){
           expect( apify ).toBeInstanceOf( 1 );
         });
+
       });
 
       describe( "The actors", function(){
