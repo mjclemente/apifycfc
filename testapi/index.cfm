@@ -11,6 +11,10 @@
     cfheader( statuscode="500", statustext="Apify Error" );
   }
 
+  if( route.left(4) == '/429' ){
+    cfheader( statuscode="429", statustext="Too Many Requests" );
+  }
+
   cfheader( name="Content-Type", value="application/json" );
   writeOutput( serializeJSON(res) );
 </cfscript>
