@@ -256,7 +256,7 @@ component displayname="apifycfc"  {
         }
       }
       // if we end up here, we've failed
-      _debug( "ApifyApi request failed. Attempt #attempts# of #variables.maxRetries#. Will not retry." );
+      _debug( "ApifyApi request retry limit reached: #variables.maxRetries# attempts failed." );
       throw( type="ApifyApiError", message="Retry limit reached: #variables.maxRetries# attempts failed." );
 
       return response;
