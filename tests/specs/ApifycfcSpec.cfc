@@ -84,11 +84,41 @@ component extends="testbox.system.BaseSpec"{
         });
 
         it("throws on timeout errors when set not to retry timeouts", function(){
-          expect( apify ).toBeInstanceOf( 1 );
+          apify_retry = new apify(
+            baseUrl = "#baseUrl#/sleep",
+            includeRaw = true,
+            httpTimeout = 1,
+            maxRetries = 2,
+            doNotRetryTimeouts = true,
+            debug = true
+          );
+
+          expect(
+            function(){
+              apify_retry.listActors( my = true, limit = 10 )
+            }
+          ).toThrow( "ApifyApiError" );
+          var stats = apify_retry.retrieveCfcStats();
+          expect( stats.calls ).toBe( 1 );
+          expect( stats.requests ).toBe( 1 );
         });
 
-        it("throws on 400 errors", function(){
-          expect( apify ).toBeInstanceOf( 1 );
+        it("throws on 400 errors and does not retry", function(){
+          apify_retry = new apify(
+            baseUrl = "#baseUrl#/400",
+            includeRaw = true,
+            maxRetries = 2,
+            debug = true
+          );
+
+          expect(
+            function(){
+              apify_retry.listActors( my = true, limit = 10 )
+            }
+          ).toThrow( "ApifyApiError" );
+          var stats = apify_retry.retrieveCfcStats();
+          expect( stats.calls ).toBe( 1 );
+          expect( stats.requests ).toBe( 1 );
         });
 
       });
