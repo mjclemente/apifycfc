@@ -69,6 +69,7 @@ component displayname="apifycfc"  {
     }
 
     public struct function retrieveCfcStats() {
+      _debug( "#getFunctionCalledName()#" );
       return variables.stats;
     }
 
