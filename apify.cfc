@@ -145,6 +145,14 @@ component displayname="apifycfc"  {
       return apiCall( 'DELETE', '/actor-tasks/#actorTaskId#' );
     }
 
+    /**
+    * @docs https://docs.apify.com/api#/reference/actor-tasks/task-input-object/get-task-input
+    * @hint Retrieves the input of a given actor task
+    */
+    public struct function getActorTaskInput( required string actorTaskId ) {
+      return apiCall( 'GET', '/actor-tasks/#actorTaskId#/input' );
+    }
+
     // TODO Runnings tasks
 
     // PRIVATE FUNCTIONS
