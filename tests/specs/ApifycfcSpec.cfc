@@ -83,7 +83,7 @@ component extends="testbox.system.BaseSpec"{
           expect( stats.requests ).toBe( 2 );
         });
 
-        it("throws on timeout errors when set not to retry timeouts", function(){
+        it("respects the settings not to retry timeouts", function(){
           apify_retry = new apify(
             baseUrl = "#baseUrl#/sleep",
             includeRaw = true,
@@ -93,17 +93,15 @@ component extends="testbox.system.BaseSpec"{
             debug = true
           );
 
-          expect(
-            function(){
-              apify_retry.listActors( my = true, limit = 10 )
-            }
-          ).toThrow( "ApifyApiError" );
+          var apify_request = apify_retry.listActors( my = true, limit = 10 );
+          expect( apify_request.statusCode ).toBe( 408 );
+
           var stats = apify_retry.retrieveCfcStats();
           expect( stats.calls ).toBe( 1 );
           expect( stats.requests ).toBe( 1 );
         });
 
-        it("throws on 400 errors and does not retry", function(){
+        it("does not retry 400 errors", function(){
           apify_retry = new apify(
             baseUrl = "#baseUrl#/400",
             includeRaw = true,
@@ -111,11 +109,8 @@ component extends="testbox.system.BaseSpec"{
             debug = true
           );
 
-          expect(
-            function(){
-              apify_retry.listActors( my = true, limit = 10 )
-            }
-          ).toThrow( "ApifyApiError" );
+          var apify_request = apify_retry.listActors( my = true, limit = 10 );
+          expect( apify_request.statusCode ).toBe( 400 );
           var stats = apify_retry.retrieveCfcStats();
           expect( stats.calls ).toBe( 1 );
           expect( stats.requests ).toBe( 1 );
