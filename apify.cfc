@@ -238,7 +238,7 @@ component displayname="apifycfc"  {
 
         if( _isStatusOk(response.statusCode) ){
           _debug( "ApifyApi request succeeded in #attempts# attempts" );
-          break;
+          return response;
         }
 
         if( _isRateLimitError(response.statusCode) ) {
@@ -258,8 +258,6 @@ component displayname="apifycfc"  {
       // if we end up here, we've failed
       _debug( "ApifyApi request retry limit reached: #variables.maxRetries# attempts failed." );
       throw( type="ApifyApiError", message="Retry limit reached: #variables.maxRetries# attempts failed." );
-
-      return response;
     }
 
     private struct function getBaseHttpHeaders() {
