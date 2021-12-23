@@ -267,6 +267,22 @@ component displayname="apifycfc"  {
       return apiCall( 'GET', '/actor-runs/#runId#/key-value-store' );
     }
 
+    /**
+    * @docs https://docs.apify.com/api#/reference/actor-runs/run-object-and-its-storages
+    * @hint Retrieves details of the dataset for a run
+    */
+    public struct function getRunDataset( required string runId ) {
+      return apiCall( 'GET', '/actor-runs/#runId#/dataset' );
+    }
+
+    /**
+    * @docs https://docs.apify.com/api#/reference/actor-runs/run-object-and-its-storages
+    * @hint Retrieves details of the request queue for a run
+    */
+    public struct function getRunRequestQueue( required string runId ) {
+      return apiCall( 'GET', '/actor-runs/#runId#/request-queue' );
+    }
+
     // PRIVATE FUNCTIONS
     private struct function parseSortArgs( required struct args ){
       var params = {};
