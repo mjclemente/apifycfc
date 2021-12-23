@@ -277,6 +277,22 @@ component extends="testbox.system.BaseSpec"{
         expect( raw.method ).toBe( 'GET' );
       });
 
+      it("can have their dataset retrieved", function(){
+        var runId = 'example_run_id';
+        var apify_request = apify.getRunDataset( runId );
+        var raw = apify_request.raw;
+        expect( raw.path ).toBe( baseUrl & '/actor-runs/#runId#/dataset' );
+        expect( raw.method ).toBe( 'GET' );
+      });
+
+      it("can have their request queue retrieved", function(){
+        var runId = 'example_run_id';
+        var apify_request = apify.getRunRequestQueue( runId );
+        var raw = apify_request.raw;
+        expect( raw.path ).toBe( baseUrl & '/actor-runs/#runId#/request-queue' );
+        expect( raw.method ).toBe( 'GET' );
+      });
+
     });
 
 
