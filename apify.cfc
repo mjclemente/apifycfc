@@ -261,10 +261,26 @@ component displayname="apifycfc"  {
 
     /**
     * @docs https://docs.apify.com/api#/reference/actor-runs/run-object-and-its-storages
-    * @hint Retrieves details of the key value store for a run
+    * @hint Retrieves details of the key-value store for a run
     */
     public struct function getRunKeyValueStore( required string runId ) {
       return apiCall( 'GET', '/actor-runs/#runId#/key-value-store' );
+    }
+
+    /**
+    * @docs https://docs.apify.com/api#/reference/actor-runs/run-object-and-its-storages
+    * @hint Retrieves the keys for a run's key-value store
+    */
+    public struct function getRunKeyValueStoreKeys( required string runId ) {
+      return apiCall( 'GET', '/actor-runs/#runId#/key-value-store/keys' );
+    }
+
+    /**
+    * @docs https://docs.apify.com/api#/reference/actor-runs/run-object-and-its-storages
+    * @hint Retrieves the values for one of a run's key-value store keys
+    */
+    public struct function getRunKeyValueStoreRecords( required string runId, required string recordKey ) {
+      return apiCall( 'GET', '/actor-runs/#runId#/key-value-store/records/#recordKey#' );
     }
 
     /**
