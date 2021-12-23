@@ -67,6 +67,9 @@ component displayname="apifycfc"  {
         return this;
     }
 
+    /**
+    * @hint Returns internal stat tracking object with calls, requests, and rate limiting information
+    */
     public struct function retrieveCfcStats() {
       _debug( "#getFunctionCalledName()#" );
       return variables.stats;
