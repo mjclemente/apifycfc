@@ -197,6 +197,16 @@ component extends="testbox.system.BaseSpec"{
           expect( raw.method ).toBe( 'POST' );
         });
 
+        it("can be run synchronously", function(){
+          var actorTaskId = 'example_actor_task_id';
+          var apify_request = apify.runActorTaskSynchronously( actorTaskId = actorTaskId, timeout = 120, memory = 256, input = {"startUrls":[{"url":"https://books.toscrape2.com/"}]} );
+          var raw = apify_request.raw;
+          expect( raw.path ).toBe( baseUrl & '/actor-tasks/#actorTaskId#/run-sync' );
+          expect( raw.params ).toBe( 'memory=256&timeout=120' );
+          expect( raw.payload ).toBe( '{"startUrls":[{"url":"https://books.toscrape2.com/"}]}' );
+          expect( raw.method ).toBe( 'POST' );
+        });
+
         it("can be updated", function(){
           var actorTaskId = 'example_actor_task_id';
           var actorId = 'xxx';
