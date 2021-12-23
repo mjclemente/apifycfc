@@ -260,6 +260,14 @@ component extends="testbox.system.BaseSpec"{
         expect( raw.method ).toBe( 'GET' );
       });
 
+      it("can be retrieved by id", function(){
+        var runId = 'example_run_id';
+        var apify_request = apify.getRunById( runId );
+        var raw = apify_request.raw;
+        expect( raw.path ).toBe( baseUrl & '/actor-runs/#runId#' );
+        expect( raw.method ).toBe( 'GET' );
+      });
+
     });
 
 
