@@ -246,17 +246,10 @@ component extends="testbox.system.BaseSpec"{
     describe( "The runs", function(){
 
       it("can be listed by user", function(){
-        var placeholder_token = 'xxx_xxx_xxx';
-        var apify_mock_token = new apify(
-            apify_token = placeholder_token,
-            baseUrl = variables.baseUrl,
-            includeRaw = true,
-            debug = true
-          );
-        var apify_request = apify_mock_token.listUserRuns( limit = 10, desc = true );
+        var apify_request = apify.listUserRuns( limit = 10, desc = true );
         var raw = apify_request.raw;
         expect( raw.path ).toBe( baseUrl & '/actor-runs' );
-        expect( raw.params ).toBe( 'desc=true&limit=10&token=#placeholder_token#' );
+        expect( raw.params ).toBe( 'desc=true&limit=10' );
         expect( raw.method ).toBe( 'GET' );
       });
 
