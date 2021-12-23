@@ -253,7 +253,7 @@ component displayname="apifycfc"  {
 
     /**
     * @docs https://docs.apify.com/api#/reference/actor-runs/run-object-and-its-storages
-    * @hint Retrieves an object that contains all the details about a run.
+    * @hint Retrieves the log for a run
     */
     public struct function getRunLog( required string runId ) {
       return apiCall( 'GET', '/actor-runs/#runId#/log' );
@@ -261,7 +261,7 @@ component displayname="apifycfc"  {
 
     /**
     * @docs https://docs.apify.com/api#/reference/actor-runs/run-object-and-its-storages
-    * @hint Retrieves an object that contains all the details about a run.
+    * @hint Retrieves details of the key value store for a run
     */
     public struct function getRunKeyValueStore( required string runId ) {
       return apiCall( 'GET', '/actor-runs/#runId#/key-value-store' );
