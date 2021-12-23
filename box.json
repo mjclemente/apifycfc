@@ -1,15 +1,17 @@
 {
-    "author":"",
-    "bugs":"",
+    "author":"Matthew Clemente <mjclemente@gmail.com>",
+    "location":"mjclemente/apifycfc#v0.0.5",
+    "version":"0.0.5",
+    "bugs":"https://github.com/mjclemente/apifycfc/issues",
     "changelog":"",
     "contributors":[],
     "dependencies":{},
-    "description":"",
+    "description":"A CFML wrapper for the Apify API. Interact with Apify's automated web scraping and automation platform.",
     "devDependencies":{
         "testbox":"^4.5.0+5"
     },
-    "documentation":"",
-    "homepage":"",
+    "documentation":"https://github.com/mjclemente/apifycfc/blob/main/README.md",
+    "homepage":"https://github.com/mjclemente/apifycfc",
     "ignore":[
         "**/.*",
         "/test/",
@@ -19,23 +21,22 @@
         "testbox":"testbox/"
     },
     "instructions":"",
-    "keywords":[],
-    "license":[
-        {
-            "type":"",
-            "URL":""
-        }
+    "keywords":[ "apify", "web scraping", "api", "puppeteer", "playwright"],
+    "license": [
+      {
+        "type": "MIT",
+        "URL": "https://github.com/mjclemente/apifycfc/blob/main/LICENSE"
+      }
     ],
-    "location":"ForgeboxStorage",
     "name":"apifycfc",
     "private":false,
-    "projectURL":"",
-    "repository":{
-        "type":"",
-        "URL":""
+    "projectURL":"https://github.com/mjclemente/apifycfc",
+    "repository": {
+      "type": "git",
+      "URL": "https://github.com/mjclemente/apifycfc"
     },
     "scripts":{},
-    "shortDescription":"A CFML wrapper for the Apify API. Interact with Apify's automated web scraping and automation platform",
+    "shortDescription":"A CFML wrapper for the Apify API. Interact with Apify's automated web scraping and automation platform.",
     "slug":"apifycfc",
     "testbox":{
         "bundles":"",
@@ -47,7 +48,7 @@
         "reporter":"",
         "runner":[
             {
-                "default":""
+                "default":"http://127.0.0.1:52558/tests/runner.cfm"
             }
         ],
         "testBundles":"",
@@ -57,6 +58,5 @@
         "watchDelay":500,
         "watchPaths":"**.cfc"
     },
-    "type":"modules",
-    "version":"0.0.0"
+    "type":"modules"
 }
