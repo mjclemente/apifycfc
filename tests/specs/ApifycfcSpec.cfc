@@ -269,7 +269,7 @@ component extends="testbox.system.BaseSpec"{
         expect( raw.method ).toBe( 'GET' );
       });
 
-      it("can have their key/value stores retrieved", function(){
+      it("can have their key-value stores retrieved", function(){
         var runId = 'example_run_id';
         var apify_request = apify.getRunKeyValueStore( runId );
         var raw = apify_request.raw;
