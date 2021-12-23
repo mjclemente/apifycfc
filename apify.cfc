@@ -252,6 +252,14 @@ component displayname="apifycfc"  {
     }
 
     /**
+    * @docs https://docs.apify.com/api#/reference/actor-runs/resurrect-run/resurrect-run
+    * @hint Resurrects a finished run and returns an object with details about it.
+    */
+    public struct function resurrectRun( required string runId ) {
+      return apiCall( 'POST', '/actor-runs/#runId#/resurrect' );
+    }
+
+    /**
     * @docs https://docs.apify.com/api#/reference/actor-runs/abort-run/abort-run
     * @hint Aborts a run and returns an object with details about it.
     */
