@@ -450,7 +450,13 @@ component displayname="apifycfc"  {
             ? ( '?' & parseQueryParams( queryParams, false ) )
             : '' );
 
-        cfhttp( url = fullPath, method = httpMethod,  result = 'result', timeout = variables.httpTimeout ) {
+        cfhttp(
+          url = fullPath,
+          method = httpMethod,
+          result = 'result',
+          timeout = variables.httpTimeout,
+          getasbinary = queryParams?.attachment ?: 'auto'
+        ) {
 
             if ( isJsonPayload( headers ) ) {
 
