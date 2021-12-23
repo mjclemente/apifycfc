@@ -261,6 +261,14 @@ component extends="testbox.system.BaseSpec"{
         expect( raw.method ).toBe( 'GET' );
       });
 
+      it("can be aborted", function(){
+        var runId = 'example_run_id';
+        var apify_request = apify.abortRun( runId );
+        var raw = apify_request.raw;
+        expect( raw.path ).toBe( baseUrl & '/actor-runs/#runId#/abort' );
+        expect( raw.method ).toBe( 'POST' );
+      });
+
       it("can have their logs retrieved", function(){
         var runId = 'example_run_id';
         var apify_request = apify.getRunLog( runId );
