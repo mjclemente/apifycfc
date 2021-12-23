@@ -29,7 +29,7 @@ component extends="testbox.system.BaseSpec"{
       describe( "The retry logic", function(){
 
         it("will retry 500 errors", function(){
-          apify_retry = new apify(
+          var apify_retry = new apify(
             baseUrl = "#baseUrl#/500",
             includeRaw = true,
             maxRetries = 2,
@@ -48,7 +48,7 @@ component extends="testbox.system.BaseSpec"{
         });
 
         it("will retry network errors", function(){
-          apify_retry = new apify(
+          var apify_retry = new apify(
             baseUrl = "http://notlocalhost",
             includeRaw = true,
             maxRetries = 2,
@@ -66,7 +66,7 @@ component extends="testbox.system.BaseSpec"{
         });
 
         it("will retry rate limit errors", function(){
-          apify_retry = new apify(
+          var apify_retry = new apify(
             baseUrl = "#baseUrl#/429",
             includeRaw = true,
             maxRetries = 2,
@@ -84,7 +84,7 @@ component extends="testbox.system.BaseSpec"{
         });
 
         it("respects the settings not to retry timeouts", function(){
-          apify_retry = new apify(
+          var apify_retry = new apify(
             baseUrl = "#baseUrl#/sleep",
             includeRaw = true,
             httpTimeout = 1,
@@ -102,7 +102,7 @@ component extends="testbox.system.BaseSpec"{
         });
 
         it("does not retry 400 errors", function(){
-          apify_retry = new apify(
+          var apify_retry = new apify(
             baseUrl = "#baseUrl#/400",
             includeRaw = true,
             maxRetries = 2,
