@@ -244,6 +244,14 @@ component displayname="apifycfc"  {
       return apiCall( 'GET', '/actor-runs', params );
     }
 
+    /**
+    * @docs https://docs.apify.com/api#/reference/actor-runs/run-object-and-its-storages
+    * @hint Retrieves an object that contains all the details about a run.
+    */
+    public struct function getRunById( required string runId ) {
+      return apiCall( 'GET', '/actor-runs/#runId#' );
+    }
+
     // PRIVATE FUNCTIONS
     private struct function parseSortArgs( required struct args ){
       var params = {};
