@@ -304,9 +304,14 @@ component extends="testbox.system.BaseSpec"{
 
       it("can have their dataset items retrieved", function(){
         var runId = 'example_run_id';
-        var apify_request = apify.getRunDatasetItems( runId );
+        var options = {
+          "format": "csv",
+          "omit": "content"
+        }
+        var apify_request = apify.getRunDatasetItems( runId, options );
         var raw = apify_request.raw;
         expect( raw.path ).toBe( baseUrl & '/actor-runs/#runId#/dataset/items' );
+        expect( raw.params ).toBe( 'format=csv&omit=content' );
         expect( raw.method ).toBe( 'GET' );
       });
 
