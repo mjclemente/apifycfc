@@ -261,6 +261,22 @@ component extends="testbox.system.BaseSpec"{
         expect( raw.method ).toBe( 'GET' );
       });
 
+      it("can have their logs retrieved", function(){
+        var runId = 'example_run_id';
+        var apify_request = apify.getRunLog( runId );
+        var raw = apify_request.raw;
+        expect( raw.path ).toBe( baseUrl & '/actor-runs/#runId#/log' );
+        expect( raw.method ).toBe( 'GET' );
+      });
+
+      it("can have their key/value stores retrieved", function(){
+        var runId = 'example_run_id';
+        var apify_request = apify.getRunKeyValueStore( runId );
+        var raw = apify_request.raw;
+        expect( raw.path ).toBe( baseUrl & '/actor-runs/#runId#/key-value-store' );
+        expect( raw.method ).toBe( 'GET' );
+      });
+
     });
 
 
