@@ -277,6 +277,23 @@ component extends="testbox.system.BaseSpec"{
         expect( raw.method ).toBe( 'GET' );
       });
 
+      it("can have their key-value store keys listed", function(){
+        var runId = 'example_run_id';
+        var apify_request = apify.getRunKeyValueStoreKeys( runId );
+        var raw = apify_request.raw;
+        expect( raw.path ).toBe( baseUrl & '/actor-runs/#runId#/key-value-store/keys' );
+        expect( raw.method ).toBe( 'GET' );
+      });
+
+      it("can have their key-value store records retrieved", function(){
+        var runId = 'example_run_id';
+        var key = 'SDK_CRAWLER_STATISTICS_0';
+        var apify_request = apify.getRunKeyValueStoreRecords( runId, key );
+        var raw = apify_request.raw;
+        expect( raw.path ).toBe( baseUrl & '/actor-runs/#runId#/key-value-store/records/#key#' );
+        expect( raw.method ).toBe( 'GET' );
+      });
+
       it("can have their dataset retrieved", function(){
         var runId = 'example_run_id';
         var apify_request = apify.getRunDataset( runId );
