@@ -294,9 +294,10 @@ component displayname="apifycfc"  {
     /**
     * @docs https://docs.apify.com/api#/reference/actor-runs/run-object-and-its-storages
     * @hint Retrieves details of the dataset for a run
+    * @options an object in which you can configure any of the available options for this endpoint. Read the docs to see the full range of options available.
     */
-    public struct function getRunDatasetItems( required string runId ) {
-      return apiCall( 'GET', '/actor-runs/#runId#/dataset/items' );
+    public struct function getRunDatasetItems( required string runId, struct options = {} ) {
+      return apiCall( 'GET', '/actor-runs/#runId#/dataset/items', options );
     }
 
     /**
