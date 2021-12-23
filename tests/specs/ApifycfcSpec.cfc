@@ -269,6 +269,14 @@ component extends="testbox.system.BaseSpec"{
         expect( raw.method ).toBe( 'POST' );
       });
 
+      it("can be resurrected", function(){
+        var runId = 'example_run_id';
+        var apify_request = apify.resurrectRun( runId );
+        var raw = apify_request.raw;
+        expect( raw.path ).toBe( baseUrl & '/actor-runs/#runId#/resurrect' );
+        expect( raw.method ).toBe( 'POST' );
+      });
+
       it("can have their logs retrieved", function(){
         var runId = 'example_run_id';
         var apify_request = apify.getRunLog( runId );
