@@ -637,10 +637,11 @@ component displayname="apifycfc"  {
       variables.stats.rateLimitErrors[attempt]++;
     }
 
-    private void function _debug( required string message, any extraInfo = {} ){
+    private void function _debug( required string message, any debug = {} ){
       if( variables.debug ){
         var enriched_message = "#dateTimeFormat( now(), "yyyy-mm-dd HH:NN:SS" )# DEBUG #message#";
-        if( !isEmpty( extraInfo ) ){
+        if( !isEmpty( debug ) ){
+          var extraInfo = duplicate(debug);
           extraInfo.delete("apify_token");
           if( extraInfo.keyExists( "headers" ) ){
             extraInfo.headers.delete("Authorization");
