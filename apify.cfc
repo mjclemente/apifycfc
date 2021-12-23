@@ -234,6 +234,16 @@ component displayname="apifycfc"  {
       return apiCall( 'POST', '/actor-tasks/#actorTaskId#/run-sync', params, input );
     }
 
+    /**
+    * @docs https://docs.apify.com/api#/reference/actor-runs/run-collection/get-user-runs-list
+    * @hint Retrieves a list of all runs for a user. Be aware that for some reason this endpoint required the authentication token to be included in the URL params, instead of as a header.
+    */
+    public struct function listUserRuns( numeric offset = 0, numeric limit = 0, boolean desc = false, string status ) {
+      var params = parseSortArgs( arguments );
+      params["token"] = variables.apify_token;
+      return apiCall( 'GET', '/actor-runs', params );
+    }
+
     // PRIVATE FUNCTIONS
     private struct function parseSortArgs( required struct args ){
       var params = {};
