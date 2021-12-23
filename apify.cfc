@@ -202,6 +202,38 @@ component displayname="apifycfc"  {
       return apiCall( 'POST', '/actor-tasks/#actorTaskId#/runs', params, input );
     }
 
+    /**
+    * @docs https://docs.apify.com/api#/reference/actor-tasks/run-collection/run-task-synchronously-(post)
+    * @hint Runs an actor task and synchronously. This is supposed to return its output, but doesn't seem to actually do that. The run must finish in 300 seconds otherwise the API endpoint returns a timeout error. If input is provided for the payload body, it is used to override the default input for the task.
+    */
+    public struct function runActorTaskSynchronously(
+      required string actorTaskId,
+      numeric timeout,
+      numeric memory,
+      string build,
+      string outputRecordKey,
+      string webhooks,
+      struct input = {}
+    ) {
+      var params = {};
+      if( !isNull( timeout ) ){
+        params["timeout"] = timeout;
+      }
+      if( !isNull( memory ) ){
+        params["memory"] = memory;
+      }
+      if( !isNull( build ) ){
+        params["build"] = build;
+      }
+      if( !isNull( outputRecordKey ) ){
+        params["outputRecordKey"] = outputRecordKey;
+      }
+      if( !isNull( webhooks ) ){
+        params["webhooks"] = webhooks;
+      }
+      return apiCall( 'POST', '/actor-tasks/#actorTaskId#/run-sync', params, input );
+    }
+
     // PRIVATE FUNCTIONS
     private struct function parseSortArgs( required struct args ){
       var params = {};
