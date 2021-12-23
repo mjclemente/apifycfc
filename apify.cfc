@@ -259,6 +259,14 @@ component displayname="apifycfc"  {
       return apiCall( 'GET', '/actor-runs/#runId#/log' );
     }
 
+    /**
+    * @docs https://docs.apify.com/api#/reference/actor-runs/run-object-and-its-storages
+    * @hint Retrieves an object that contains all the details about a run.
+    */
+    public struct function getRunKeyValueStore( required string runId ) {
+      return apiCall( 'GET', '/actor-runs/#runId#/key-value-store' );
+    }
+
     // PRIVATE FUNCTIONS
     private struct function parseSortArgs( required struct args ){
       var params = {};
