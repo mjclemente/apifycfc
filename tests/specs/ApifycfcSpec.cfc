@@ -373,6 +373,21 @@ component extends="testbox.system.BaseSpec"{
         expect( raw.method ).toBe( 'POST' );
       });
 
+      it("can be updated", function(){
+        var scheduleId = 'example_schedule_id';
+        var actions = [
+          {
+            "type": "RUN_ACTOR_TASK",
+            "actorTaskId": "example_actor_task_id"
+          }
+        ];
+        var apify_request = apify.updateSchedule( scheduleId = scheduleId, name = "test2", cronExpression = "@monthly", description = "This is just a test 2" );
+        var raw = apify_request.raw;
+        expect( raw.path ).toBe( baseUrl & '/schedules/#scheduleId#' );
+        expect( raw.payload ).toBe( '{"cronExpression":"@monthly","name":"test2","description":"This is just a test 2"}' );
+        expect( raw.method ).toBe( 'PUT' );
+      });
+
       it("can be created with the convenience actor method", function(){
         var actorId = 'example_actor_id';
         var input = {
