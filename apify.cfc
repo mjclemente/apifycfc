@@ -336,7 +336,11 @@ component displayname="apifycfc"  {
       return apiCall( 'GET', '/schedules', params );
     }
 
+
+    // ===========================================================================
     // PRIVATE FUNCTIONS
+    // ===========================================================================
+
     private struct function parseSortArgs( required struct args ){
       var params = {};
       if( args.keyExists( 'my' ) && args.my ){
