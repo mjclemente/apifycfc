@@ -470,6 +470,30 @@ component displayname="apifycfc"  {
     }
 
     /**
+    * @hint Convenience method for updating a schedule and specifying a specific actor task action. Delegates the actual request to @updateSchedule
+    @actorTaskId is the id of the actor task to be scheduled
+    @input is an optional input struct used to override the task input configuration when the schedule is run
+    @scheduleOptions is a struct that can include the options accepted by the @createSchedule method, such as `name` and `isEnabled`
+    */
+    public struct function updateTaskSchedule(
+      required string scheduleId,
+      required string actorTaskId,
+      struct input,
+      struct scheduleOptions = {}
+    ) {
+      var action = {
+        "type": "RUN_ACTOR_TASK",
+        "actorTaskId": actorTaskId
+      };
+      if( !isNull(input) ){
+        action["input"] = input;
+      }
+      scheduleOptions.append( { "actions": [ action ] } );
+      scheduleOptions["scheduleId"] = scheduleId;
+      return updateSchedule( argumentCollection = scheduleOptions );
+    }
+
+    /**
     * @docs https://docs.apify.com/api#/reference/schedules/schedule-object/get-schedule
     * @hint Retrieves an object that contains all the details about a schedule.
     */
