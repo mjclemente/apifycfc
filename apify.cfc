@@ -501,6 +501,14 @@ component displayname="apifycfc"  {
       return apiCall( 'GET', '/schedules/#scheduleId#' );
     }
 
+    /**
+    * @docs https://docs.apify.com/api#/reference/schedules/schedule-object/delete-schedule
+    * @hint Deletes schedule by its id
+    */
+    public struct function deleteSchedule( required string scheduleId ) {
+      return apiCall( 'DELETE', '/schedules/#scheduleId#' );
+    }
+
 
 
 
