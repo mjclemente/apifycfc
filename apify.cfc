@@ -425,6 +425,16 @@ component displayname="apifycfc"  {
       return createSchedule( argumentCollection = scheduleOptions );
     }
 
+    /**
+    * @docs https://docs.apify.com/api#/reference/schedules/schedule-object/get-schedule
+    * @hint Retrieves an object that contains all the details about a schedule.
+    */
+    public struct function getScheduleById( required string scheduleId ) {
+      return apiCall( 'GET', '/schedules/#scheduleId#' );
+    }
+
+
+
 
     // ===========================================================================
     // PRIVATE FUNCTIONS
