@@ -373,6 +373,58 @@ component displayname="apifycfc"  {
       return apiCall( 'POST', '/schedules', {}, payload );
     }
 
+    /**
+    * @hint Convenience method for creating a schedule for an actor. Delegates the actual request to @createSchedule
+    @actId is the id of the actor to be scheduled
+    @input is an optional input struct used to override the actor input configuration when the schedule is run
+    @options is optional, and provides options for the run
+    @scheduleOptions is a struct that can include the options accepted by the @createSchedule method, such as `name` and `isEnabled`
+    */
+    public struct function createActorSchedule(
+      required string actId,
+      struct input,
+      struct options,
+      struct scheduleOptions = {}
+    ) {
+      var action = {
+        "type": "RUN_ACTOR",
+        "actorId": actId
+      };
+      if( !isNull(input) ){
+        action["runInput"] = {
+          "body": serializeJSON(input),
+          "contentType": "application/json; charset=utf-8"
+        };
+      }
+      if( !isNull(options) ){
+        action["runOptions"] = options;
+      }
+      scheduleOptions.append( { "actions": [ action ] } );
+      return createSchedule( argumentCollection = scheduleOptions );
+    }
+
+    /**
+    * @hint Convenience method for creating a schedule for an actor task. Delegates the actual request to @createSchedule
+    @actorTaskId is the id of the actor task to be scheduled
+    @input is an optional input struct used to override the task input configuration when the schedule is run
+    @scheduleOptions is a struct that can include the options accepted by the @createSchedule method, such as `name` and `isEnabled`
+    */
+    public struct function createTaskSchedule(
+      required string actorTaskId,
+      struct input,
+      struct scheduleOptions = {}
+    ) {
+      var action = {
+        "type": "RUN_ACTOR_TASK",
+        "actorTaskId": actorTaskId
+      };
+      if( !isNull(input) ){
+        action["input"] = input;
+      }
+      scheduleOptions.append( { "actions": [ action ] } );
+      return createSchedule( argumentCollection = scheduleOptions );
+    }
+
 
     // ===========================================================================
     // PRIVATE FUNCTIONS
