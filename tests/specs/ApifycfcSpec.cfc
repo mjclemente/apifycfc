@@ -458,6 +458,14 @@ component extends="testbox.system.BaseSpec"{
         expect( raw.method ).toBe( 'PUT' );
       });
 
+      it("can be deleted", function(){
+        var scheduleId = 'example_schedule_id';
+        var apify_request = apify.deleteSchedule( scheduleId );
+        var raw = apify_request.raw;
+        expect( raw.path ).toBe( baseUrl & '/schedules/#scheduleId#' );
+        expect( raw.method ).toBe( 'DELETE' );
+      });
+
     });
 
 
