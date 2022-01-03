@@ -349,26 +349,13 @@ component displayname="apifycfc"  {
       string description,
       required array actions
     ) {
-      var payload = {
-        "actions": actions
-      };
-      if( !isNull( name ) ){
-        payload["name"] = name;
-      }
-      if( !isNull( isEnabled ) ){
-        payload["isEnabled"] = isEnabled;
-      }
-      if( !isNull( isExclusive ) ){
-        payload["isExclusive"] = isExclusive;
-      }
-      if( !isNull( cronExpression ) ){
-        payload["cronExpression"] = cronExpression;
-      }
-      if( !isNull( timezone ) ){
-        payload["timezone"] = timezone;
-      }
-      if( !isNull( description ) ){
-        payload["description"] = description;
+      var payload = {};
+      var scheduleOptions = [ 'name', 'isEnabled', 'isExclusive', 'cronExpression', 'timezone', 'description', 'actions' ];
+
+      for( var option in scheduleOptions ){
+        if( !isNull( arguments[option] ) ){
+          payload["#option#"] = arguments[option];
+        }
       }
       return apiCall( 'POST', '/schedules', {}, payload );
     }
