@@ -7,7 +7,7 @@
             "path-prefix(/testapi) -> rewrite('/testapi/index.cfm%{RELATIVE_PATH}')"
         ],
         "http":{
-          "port":"52558"
-      }
+            "port":"52558"
+        }
     }
 }
