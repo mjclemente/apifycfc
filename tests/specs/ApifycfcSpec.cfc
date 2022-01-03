@@ -365,6 +365,23 @@ component extends="testbox.system.BaseSpec"{
         expect( raw.method ).toBe( 'POST' );
       });
 
+      it("can be created with the convenience actor method", function(){
+        var actorId = 'example_actor_id';
+        var input = {
+          "startUrls": [
+            {
+                "url": "https://books.toscrape.com/"
+            }
+          ]
+        };
+        var scheduleOptions = { "name": "testing", "cronExpression": "@monthly" };
+        var apify_request = apify.createActorSchedule( actId = actorId, input = input, scheduleOptions = scheduleOptions );
+        var raw = apify_request.raw;
+        expect( raw.path ).toBe( baseUrl & '/schedules' );
+        expect( raw.payload ).toBe( '{"actions":[{"actorId":"#actorId#","runInput":{"contentType":"application/json; charset=utf-8","body":#serializeJSON(serializeJSON(input))#},"type":"RUN_ACTOR"}],"cronExpression":"@monthly","name":"testing"}' );
+        expect( raw.method ).toBe( 'POST' );
+      });
+
     });
 
 
