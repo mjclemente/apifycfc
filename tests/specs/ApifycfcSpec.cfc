@@ -351,6 +351,20 @@ component extends="testbox.system.BaseSpec"{
         expect( raw.method ).toBe( 'GET' );
       });
 
+      it("can be created", function(){
+        var actions = [
+          {
+            "type": "RUN_ACTOR_TASK",
+            "actorTaskId": "example_actor_task_id"
+          }
+        ];
+        var apify_request = apify.createSchedule( name = "test", cronExpression = "@daily", description = "This is just a test", actions = actions );
+        var raw = apify_request.raw;
+        expect( raw.path ).toBe( baseUrl & '/schedules' );
+        expect( raw.payload ).toBe( '{"actions":[{"actorTaskId":"example_actor_task_id","type":"RUN_ACTOR_TASK"}],"cronExpression":"@daily","name":"test","description":"This is just a test"}' );
+        expect( raw.method ).toBe( 'POST' );
+      });
+
     });
 
 

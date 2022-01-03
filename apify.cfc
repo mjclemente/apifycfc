@@ -336,6 +336,43 @@ component displayname="apifycfc"  {
       return apiCall( 'GET', '/schedules', params );
     }
 
+    /**
+    * @docs https://docs.apify.com/api#/reference/schedules/schedules-collection/create-schedule
+    * @hint Creates a new schedule with settings provided. The response is the created schedule object.
+    */
+    public struct function createSchedule(
+      string name,
+      boolean isEnabled,
+      boolean isExclusive,
+      string cronExpression,
+      string timezone,
+      string description,
+      required array actions
+    ) {
+      var payload = {
+        "actions": actions
+      };
+      if( !isNull( name ) ){
+        payload["name"] = name;
+      }
+      if( !isNull( isEnabled ) ){
+        payload["isEnabled"] = isEnabled;
+      }
+      if( !isNull( isExclusive ) ){
+        payload["isExclusive"] = isExclusive;
+      }
+      if( !isNull( cronExpression ) ){
+        payload["cronExpression"] = cronExpression;
+      }
+      if( !isNull( timezone ) ){
+        payload["timezone"] = timezone;
+      }
+      if( !isNull( description ) ){
+        payload["description"] = description;
+      }
+      return apiCall( 'POST', '/schedules', {}, payload );
+    }
+
 
     // ===========================================================================
     // PRIVATE FUNCTIONS
