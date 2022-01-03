@@ -341,6 +341,18 @@ component extends="testbox.system.BaseSpec"{
 
     });
 
+    describe( "The schedules", function(){
+
+      it("can be listed", function(){
+        var apify_request = apify.listSchedules( limit = 10, desc = true );
+        var raw = apify_request.raw;
+        expect( raw.path ).toBe( baseUrl & '/schedules' );
+        expect( raw.params ).toBe( 'desc=true&limit=10' );
+        expect( raw.method ).toBe( 'GET' );
+      });
+
+    });
+
 
 
 
