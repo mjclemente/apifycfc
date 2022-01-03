@@ -438,7 +438,7 @@ component displayname="apifycfc"  {
     }
 
     /**
-    * @hint Convenience method for updating a schedule for an actor. Delegates the actual request to @updateSchedule
+    * @hint Convenience method for updating a schedule and specifying a specific actor action. Delegates the actual request to @updateSchedule
     @actId is the id of the actor to be scheduled
     @input is an optional input struct used to override the actor input configuration when the schedule is run
     @options is optional, and provides options for the run
