@@ -440,6 +440,24 @@ component extends="testbox.system.BaseSpec"{
         expect( raw.method ).toBe( 'POST' );
       });
 
+      it("can be updated with the convenience task method", function(){
+        var scheduleId = 'example_schedule_id';
+        var actorTaskId = 'example_actor_task_id';
+        var input = {
+          "startUrls": [
+            {
+                "url": "https://books.toscrapes2.com/"
+            }
+          ]
+        };
+        var scheduleOptions = { "name": "testing", "cronExpression": "@monthly" };
+        var apify_request = apify.updateTaskSchedule( scheduleId = scheduleId, actorTaskId = actorTaskId, input = input, scheduleOptions = scheduleOptions );
+        var raw = apify_request.raw;
+        expect( raw.path ).toBe( baseUrl & '/schedules/#scheduleId#' );
+        expect( raw.payload ).toBe( '{"actions":[{"actorTaskId":"#actorTaskId#","input":#serializeJSON(input)#,"type":"RUN_ACTOR_TASK"}],"cronExpression":"@monthly","name":"testing"}' );
+        expect( raw.method ).toBe( 'PUT' );
+      });
+
     });
 
 
