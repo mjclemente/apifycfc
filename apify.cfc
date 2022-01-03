@@ -426,6 +426,31 @@ component displayname="apifycfc"  {
     }
 
     /**
+    * @docs https://docs.apify.com/api#/reference/schedules/schedule-object/update-schedule
+    * @hint Updates a schedule
+    */
+    public struct function updateSchedule(
+      required string scheduleId,
+      string name,
+      boolean isEnabled,
+      boolean isExclusive,
+      string cronExpression,
+      string timezone,
+      string description,
+      array actions
+    ) {
+      var payload = {};
+      var scheduleOptions = [ 'name', 'isEnabled', 'isExclusive', 'cronExpression', 'timezone', 'description', 'actions' ];
+
+      for( var option in scheduleOptions ){
+        if( !isNull( arguments[option] ) ){
+          payload["#option#"] = arguments[option];
+        }
+      }
+      return apiCall( 'PUT', '/schedules/#scheduleId#', {}, payload );
+    }
+
+    /**
     * @docs https://docs.apify.com/api#/reference/schedules/schedule-object/get-schedule
     * @hint Retrieves an object that contains all the details about a schedule.
     */
