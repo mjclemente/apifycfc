@@ -398,7 +398,7 @@ component extends="testbox.system.BaseSpec"{
           ]
         };
         var scheduleOptions = { "name": "testing", "cronExpression": "@monthly" };
-        var apify_request = apify.createActorSchedule( actId = actorId, input = input, scheduleOptions = scheduleOptions );
+        var apify_request = apify.createScheduleActor( actId = actorId, input = input, scheduleOptions = scheduleOptions );
         var raw = apify_request.raw;
         expect( raw.path ).toBe( baseUrl & '/schedules' );
         expect( raw.payload ).toBe( '{"actions":[{"actorId":"#actorId#","runInput":{"contentType":"application/json; charset=utf-8","body":#serializeJSON(serializeJSON(input))#},"type":"RUN_ACTOR"}],"cronExpression":"@monthly","name":"testing"}' );
@@ -416,7 +416,7 @@ component extends="testbox.system.BaseSpec"{
           ]
         };
         var scheduleOptions = { "name": "testing", "cronExpression": "@monthly" };
-        var apify_request = apify.updateActorSchedule( scheduleId = scheduleId, actId = actorId, input = input, scheduleOptions = scheduleOptions );
+        var apify_request = apify.updateScheduleActor( scheduleId = scheduleId, actId = actorId, input = input, scheduleOptions = scheduleOptions );
         var raw = apify_request.raw;
         expect( raw.path ).toBe( baseUrl & '/schedules/#scheduleId#' );
         expect( raw.payload ).toBe( '{"actions":[{"actorId":"#actorId#","runInput":{"contentType":"application/json; charset=utf-8","body":#serializeJSON(serializeJSON(input))#},"type":"RUN_ACTOR"}],"cronExpression":"@monthly","name":"testing"}' );
@@ -433,7 +433,7 @@ component extends="testbox.system.BaseSpec"{
           ]
         };
         var scheduleOptions = { "name": "testing", "cronExpression": "@monthly" };
-        var apify_request = apify.createTaskSchedule( actorTaskId = actorTaskId, input = input, scheduleOptions = scheduleOptions );
+        var apify_request = apify.createScheduleTask( actorTaskId = actorTaskId, input = input, scheduleOptions = scheduleOptions );
         var raw = apify_request.raw;
         expect( raw.path ).toBe( baseUrl & '/schedules' );
         expect( raw.payload ).toBe( '{"actions":[{"actorTaskId":"#actorTaskId#","input":#serializeJSON(input)#,"type":"RUN_ACTOR_TASK"}],"cronExpression":"@monthly","name":"testing"}' );
@@ -451,7 +451,7 @@ component extends="testbox.system.BaseSpec"{
           ]
         };
         var scheduleOptions = { "name": "testing", "cronExpression": "@monthly" };
-        var apify_request = apify.updateTaskSchedule( scheduleId = scheduleId, actorTaskId = actorTaskId, input = input, scheduleOptions = scheduleOptions );
+        var apify_request = apify.updateScheduleTask( scheduleId = scheduleId, actorTaskId = actorTaskId, input = input, scheduleOptions = scheduleOptions );
         var raw = apify_request.raw;
         expect( raw.path ).toBe( baseUrl & '/schedules/#scheduleId#' );
         expect( raw.payload ).toBe( '{"actions":[{"actorTaskId":"#actorTaskId#","input":#serializeJSON(input)#,"type":"RUN_ACTOR_TASK"}],"cronExpression":"@monthly","name":"testing"}' );

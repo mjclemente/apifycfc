@@ -367,7 +367,7 @@ component displayname="apifycfc"  {
     @options is optional, and provides options for the run
     @scheduleOptions is a struct that can include the options accepted by the @createSchedule method, such as `name` and `isEnabled`
     */
-    public struct function createActorSchedule(
+    public struct function createScheduleActor(
       required string actId,
       struct input,
       struct options,
@@ -396,7 +396,7 @@ component displayname="apifycfc"  {
     @input is an optional input struct used to override the task input configuration when the schedule is run
     @scheduleOptions is a struct that can include the options accepted by the @createSchedule method, such as `name` and `isEnabled`
     */
-    public struct function createTaskSchedule(
+    public struct function createScheduleTask(
       required string actorTaskId,
       struct input,
       struct scheduleOptions = {}
@@ -444,7 +444,7 @@ component displayname="apifycfc"  {
     @options is optional, and provides options for the run
     @scheduleOptions is a struct that can include the options accepted by the @createSchedule method, such as `name` and `isEnabled`
     */
-    public struct function updateActorSchedule(
+    public struct function updateScheduleActor(
       required string scheduleId,
       required string actId,
       struct input,
@@ -475,7 +475,7 @@ component displayname="apifycfc"  {
     @input is an optional input struct used to override the task input configuration when the schedule is run
     @scheduleOptions is a struct that can include the options accepted by the @createSchedule method, such as `name` and `isEnabled`
     */
-    public struct function updateTaskSchedule(
+    public struct function updateScheduleTask(
       required string scheduleId,
       required string actorTaskId,
       struct input,
