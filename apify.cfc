@@ -327,6 +327,15 @@ component displayname="apifycfc"  {
       return apiCall( 'GET', '/actor-runs/#runId#/request-queue' );
     }
 
+    /**
+    * @docs https://docs.apify.com/api#/reference/schedules/schedules-collection/get-list-of-schedules
+    * @hint Retrieves a list of schedules
+    */
+    public struct function listSchedules( numeric offset = 0, numeric limit = 0, boolean desc = false ) {
+      var params = parseSortArgs( arguments );
+      return apiCall( 'GET', '/schedules', params );
+    }
+
     // PRIVATE FUNCTIONS
     private struct function parseSortArgs( required struct args ){
       var params = {};
