@@ -91,3 +91,44 @@ Retrieves details of the dataset for a run. The parameter `options` an object in
 #### `getRunRequestQueue( required string runId )`
 
 Retrieves details of the request queue for a run. *[Endpoint docs](https://docs.apify.com/api#/reference/actor-runs/run-object-and-its-storages)*
+
+#### `listSchedules( numeric offset=0, numeric limit=0, boolean desc=false )`
+
+Retrieves a list of schedules. *[Endpoint docs](https://docs.apify.com/api#/reference/schedules/schedules-collection/get-list-of-schedules)*
+
+#### `createSchedule( string name, boolean isEnabled, boolean isExclusive, string cronExpression, string timezone, string description, required array actions )`
+
+Creates a new schedule with settings provided. The response is the created schedule object. *[Endpoint docs](https://docs.apify.com/api#/reference/schedules/schedules-collection/create-schedule)*
+
+#### `createScheduleActor( required string actId, struct input, struct options, struct scheduleOptions={} )`
+
+Convenience method for creating a schedule for an actor. Delegates the actual request to @createSchedule. The parameter `actId` is the id of the actor to be scheduled. The parameter `input` is an optional input struct used to override the actor input configuration when the schedule is run. The parameter `options` is optional, and provides options for the run. The parameter `scheduleOptions` is a struct that can include the options accepted by the @createSchedule method, such as `name` and `isEnabled`.
+
+#### `createScheduleTask( required string actorTaskId, struct input, struct scheduleOptions={} )`
+
+Convenience method for creating a schedule for an actor task. Delegates the actual request to @createSchedule. The parameter `actorTaskId` is the id of the actor task to be scheduled. The parameter `input` is an optional input struct used to override the task input configuration when the schedule is run. The parameter `scheduleOptions` is a struct that can include the options accepted by the @createSchedule method, such as `name` and `isEnabled`.
+
+#### `updateSchedule( required string scheduleId, string name, boolean isEnabled, boolean isExclusive, string cronExpression, string timezone, string description, array actions )`
+
+Updates a schedule. *[Endpoint docs](https://docs.apify.com/api#/reference/schedules/schedule-object/update-schedule)*
+
+#### `updateScheduleActor( required string scheduleId, required string actId, struct input, struct options, struct scheduleOptions={} )`
+
+Convenience method for updating a schedule and specifying a specific actor action. Delegates the actual request to @updateSchedule. The parameter `actId` is the id of the actor to be scheduled. The parameter `input` is an optional input struct used to override the actor input configuration when the schedule is run. The parameter `options` is optional, and provides options for the run. The parameter `scheduleOptions` is a struct that can include the options accepted by the @createSchedule method, such as `name` and `isEnabled`.
+
+#### `updateScheduleTask( required string scheduleId, required string actorTaskId, struct input, struct scheduleOptions={} )`
+
+Convenience method for updating a schedule and specifying a specific actor task action. Delegates the actual request to @updateSchedule. The parameter `actorTaskId` is the id of the actor task to be scheduled. The parameter `input` is an optional input struct used to override the task input configuration when the schedule is run. The parameter `scheduleOptions` is a struct that can include the options accepted by the @createSchedule method, such as `name` and `isEnabled`.
+
+#### `getScheduleById( required string scheduleId )`
+
+Retrieves an object that contains all the details about a schedule. *[Endpoint docs](https://docs.apify.com/api#/reference/schedules/schedule-object/get-schedule)*
+
+#### `deleteSchedule( required string scheduleId )`
+
+Deletes schedule by its id. *[Endpoint docs](https://docs.apify.com/api#/reference/schedules/schedule-object/delete-schedule)*
+
+#### `getScheduleLog( required string scheduleId )`
+
+Responds with HTTP status 302 to redirect to an URL containing the requested log. The log has a content type text/plain and it is encoded as gzip returned with appropriate HTTP headers. *[Endpoint docs](https://docs.apify.com/api#/reference/schedules/schedule-log/get-schedule-log)*
+
