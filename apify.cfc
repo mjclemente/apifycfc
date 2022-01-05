@@ -509,6 +509,14 @@ component displayname="apifycfc"  {
       return apiCall( 'DELETE', '/schedules/#scheduleId#' );
     }
 
+    /**
+    * @docs https://docs.apify.com/api#/reference/schedules/schedule-log/get-schedule-log
+    * @hint Responds with HTTP status 302 to redirect to an URL containing the requested log. The log has a content type text/plain and it is encoded as gzip returned with appropriate HTTP headers.
+    */
+    public struct function getScheduleLog( required string scheduleId ) {
+      return apiCall( 'GET', '/schedules/#scheduleId#/log' );
+    }
+
 
 
 

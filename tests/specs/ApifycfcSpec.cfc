@@ -359,6 +359,14 @@ component extends="testbox.system.BaseSpec"{
         expect( raw.method ).toBe( 'GET' );
       });
 
+      it("can have their logs retrieved", function(){
+        var scheduleId = 'example_schedule_id';
+        var apify_request = apify.getScheduleLog( scheduleId );
+        var raw = apify_request.raw;
+        expect( raw.path ).toBe( baseUrl & '/schedules/#scheduleId#/log' );
+        expect( raw.method ).toBe( 'GET' );
+      });
+
       it("can be created", function(){
         var actions = [
           {
